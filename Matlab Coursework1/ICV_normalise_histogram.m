@@ -1,0 +1,1 @@
+function normalisedhistogram = ICV_normalise_histogram(histogram)
