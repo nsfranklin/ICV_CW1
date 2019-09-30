@@ -22,3 +22,10 @@ imwrite(output, 'skew40.jpg');
 output = ICV_skew(img, 60);
 imwrite(output, 'skew60.jpg');
 
+output = ICV_skew(ICV_rotate(img, 20),50);
+imwrite(output, 'rotate20skew50.jpg');
+
+output = ICV_rotate(ICV_skew(img,50),20);
+imwrite(output, 'skew50rotate20.jpg');
+
+
