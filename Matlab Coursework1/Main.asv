@@ -1,0 +1,23 @@
+file = fullfile('Datasets','DatasetA','face-1.jpg');
+
+img = imread(file);
+
+output = ICV_rotate(img, 30);
+
+imwrite(output, 'rotate30.jpg');
+
+output = ICV_rotate(img, 60);
+
+imwrite(output, 'rotate30.jpg');
+
+output = ICV_rotate(img, 120);
+
+imwrite(output, 'rotate30.jpg');
+
+output = ICV_rotate(img, 30);
+
+imwrite(output, 'rotate30.jpg');
+
+output = ICV_rotate(img, 30);
+
+imwrite(output, 'rotate30.jpg');

@@ -10,3 +10,4 @@ function imgout = ICV_rotate(imgin, angle) %angle will always be degress so will
 
 
 
+imgout = zeros(3,3);
