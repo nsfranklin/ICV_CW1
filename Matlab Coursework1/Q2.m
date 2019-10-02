@@ -1,8 +1,9 @@
 file = fullfile('Datasets','DatasetA','car-1.jpg');
 img = imread(file);
+img = ICV_togrey(img);
 
 boxkernel = [1,1,1;1,1,1;1,1,1];
-kernelA = [1,2,1;2,4,2;1,2,2];
+kernelA = [1,2,1;2,4,2;1,2,1];
 matConstA = 16;
 kernelB = [0,1,0;1,-4,1;0,1,0];
 kernelA5x5 = [1,4,6,4,1;4,16,24,16,4;6,24,36,24,6;4,16,24,16,4;1,4,6,4,1];
@@ -24,67 +25,67 @@ disp(kernelB7x7);
 
 output = ICV_padarry(img,1,1);
 output = ICV_convolve(output, boxkernel, 9);
-imwrite(output, '3x3Average.jpg');
+imwrite(uint8(output), '3x3Average.jpg');
 
 output = ICV_padarry(img,1,1);
 output = ICV_convolve(output, kernelA, matConstA);
-imwrite(output, 'kernalA3x3.jpg');
+imwrite(uint8(output), 'kernalA3x3.jpg');
 
 output = ICV_padarry(img,1,1);
 output = ICV_convolve(output, kernelB, 1);
-imwrite(output, 'kernalB3x3.jpg');
+imwrite(uint8(output), 'kernalB3x3.jpg');
 
 output = ICV_padarry(img,1,1);
 output = ICV_convolve(output, kernelA, matConstA);
 output = ICV_padarry(output,1,1);
 output = ICV_convolve(output, kernelA, matConstA);
-imwrite(output, 'kernelAkernalA3x3.jpg');
+imwrite(uint8(output), 'kernelAkernalA3x3.jpg');
 
 output = ICV_padarry(img,1,1);
 output = ICV_convolve(output, kernelA, matConstA);
 output = ICV_padarry(output,1,1);
 output = ICV_convolve(output, kernelB, 1);
-imwrite(output, 'kernelAkernelB3x3.jpg');
+imwrite(uint8(output), 'kernelAkernelB3x3.jpg');
 
 output = ICV_padarry(img,1,1);
 output = ICV_convolve(output, kernelB, 1);
 output = ICV_padarry(output,1,1);
 output = ICV_convolve(output, kernelA, matConstA);
-imwrite(output, 'kernelBkernelA3x3.jpg');
+imwrite(uint8(output), 'kernelBkernelA3x3.jpg');
 
 output = ICV_padarry(img,2,1);
 output = ICV_convolve(output, kernelA5x5, matConstA5x5);
 output = ICV_padarry(output,2,1);
 output = ICV_convolve(output, kernelA5x5, matConstA5x5);
-imwrite(output, 'kernelAkernelA5x5.jpg');
+imwrite(uint8(output), 'kernelAkernelA5x5.jpg');
 
 output = ICV_padarry(img,2,1);
 output = ICV_convolve(output, kernelA5x5, matConstA5x5);
 output = ICV_padarry(output,2,1);
 output = ICV_convolve(output, kernelB5x5, 1);
-imwrite(output, 'kernelAkernelB5x5.jpg');
+imwrite(uint8(output), 'kernelAkernelB5x5.jpg');
 
 output = ICV_padarry(img,2,1);
 output = ICV_convolve(output, kernelB5x5, 1);
 output = ICV_padarry(output,2,1);
 output = ICV_convolve(output, kernelA5x5, matConstA5x5);
-imwrite(output, 'kernelBkernelA5x5.jpg');
+imwrite(uint8(output), 'kernelBkernelA5x5.jpg');
 
 output = ICV_padarry(img,3,1);
 output = ICV_convolve(output, kernelA7x7, matConstA7x7);
 output = ICV_padarry(output,3,1);
 output = ICV_convolve(output, kernelA7x7, matConstA7x7);
-imwrite(output, 'kernelAkernelA7x7.jpg');
+imwrite(uint8(output), 'kernelAkernelA7x7.jpg');
 
 output = ICV_padarry(img,3,1);
 output = ICV_convolve(output, kernelA7x7, matConstA7x7);
 output = ICV_padarry(output,3,1);
 output = ICV_convolve(output, kernelB7x7, 1);
-imwrite(output, 'kernelAkernelB7x7.jpg');
+imwrite(uint8(output), 'kernelAkernelB7x7.jpg');
 
 output = ICV_padarry(img,3,1);
 output = ICV_convolve(output, kernelB7x7, 1);
 output = ICV_padarry(output,3,1);
 output = ICV_convolve(output, kernelA7x7, matConstA7x7);
-imwrite(output, 'kernelBkernelA7x7.jpg');
+imwrite(uint8(output), 'kernelBkernelA7x7.jpg');
 
