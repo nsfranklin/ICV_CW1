@@ -5,10 +5,9 @@ rgbHist = zeros(256,3);
 
 for x = 1:width-1
     for y = 1:height-1
-        rgbHist(uint8(imgin(x,y,1)),1) = 1 + rgbHist(imgin(x,y,1),1);
-        rgbHist(uint8(imgin(x,y,2)),2) = 1 + rgbHist(imgin(x,y,2),2);
-        rgbHist(uint8(imgin(x,y,3)),3) = 1 + rgbHist(imgin(x,y,3),3);
-
+        rgbHist(uint8(imgin(x,y,1)),1) = 1 + rgbHist(uint8(imgin(x,y,1)),1);
+        rgbHist(uint8(imgin(x,y,2)),2) = 1 + rgbHist(uint8(imgin(x,y,2)),2);
+        rgbHist(uint8(imgin(x,y,3)),3) = 1 + rgbHist(uint8(imgin(x,y,3)),3);
     end
 end
 
