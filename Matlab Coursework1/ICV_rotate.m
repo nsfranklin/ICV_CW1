@@ -33,11 +33,7 @@ yMin = min(min(transPixPos(:,:,2)));
 
 output = zeros(xMax-xMin+1,yMax-yMin+1,3);
 
-for m = 1:size(transPixPos,1) %finding overlayed pixels
-    for n = 1:size(transPixPos,2)
-
-    end
-end
+duplicateValue = ICV_find_overlayed
 
 for k = 1:width
     for l = 1:height
