@@ -51,21 +51,17 @@ for i = 1:outputWidth
         if output(i,j) == -1;
             temp = 0;
             count = 0;
-            if 
-            temp = output    
-            count = count + 1;
+            if
+            
             end
             if
-                
-            count = count + 1;
+            
             end
             if
-                
-            count = count + 1;
+            
             end
             if
-                
-            count = count + 1;
+            
             end
             if count > 1;
                 output(i,j) = round(temp/3);

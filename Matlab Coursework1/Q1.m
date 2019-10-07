@@ -1,10 +1,10 @@
 file = fullfile('Datasets','name.png');
 img = imread(file);
-
+%img = ones(10,10,3);
 
 output = ICV_rotate(img, 30);
 imwrite(output, 'rotate30.png');
-
+%{
 output = ICV_rotate(img, 60);
 imwrite(output, 'rotate60.png');
 
@@ -14,7 +14,7 @@ imwrite(output, 'rotate120.png');
 output = ICV_rotate(img, -50);
 imwrite(output, 'rotate-50.png');
 
-%{
+
 output = ICV_horizontal_skew(img, -80);
 imwrite(output, 'skew10.png');
 imshow('skew10.png');
