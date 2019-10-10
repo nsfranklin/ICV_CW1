@@ -36,19 +36,19 @@ outputHeight = size(output,2);
 
 
 c = cell(outputWidth,outputHeight,3,1);
-for i = 1:width %Cell arrays used to find and resolve overlayed pixels.
+for i = 1:width %Cell arrays used to find and resolve overlayed pixels. Fills Cell were depth marks overlaying pixels.
     for j = 1:height
-        if isempty(c{i,j,1}) 
-            c{i,j,1,1} = imgin(i,j,1);
-            c{i,j,1,2} = imgin(i,j,2);
-            c{i,j,1,3} = imgin(i,j,3);
+        if isempty(c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,1}) 
+            c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,1,1} = imgin(i,j,1);
+            c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,1,2} = imgin(i,j,2);
+            c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,1,3} = imgin(i,j,3);
         else 
             count = 2;
             while true 
-                if isempty(c{i,j,count})
-                    c{i,j,count,1} = imgin(i,j,1);
-                    c{i,j,count,2} = imgin(i,j,2);
-                    c{i,j,count,3} = imgin(i,j,3);
+                if isempty(c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count})
+                    c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,1} = imgin(i,j,1);
+                    c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,2} = imgin(i,j,2);
+                    c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,3} = imgin(i,j,3);
                     break;
                 end
                 count = count + 1;
@@ -57,61 +57,41 @@ for i = 1:width %Cell arrays used to find and resolve overlayed pixels.
     end
 end
 
-disp(c);
 
-for k = 1:width
-    for l = 1:height
-        if output(transPixPos(k,l,1)+1-xMin,transPixPos(k,l,2)+1-yMin,1) == -1
-            output(transPixPos(k,l,1)+1-xMin,transPixPos(k,l,2)+1-yMin,1) = imgin(k,l,1);
-            output(transPixPos(k,l,1)+1-xMin,transPixPos(k,l,2)+1-yMin,2) = imgin(k,l,2); 
-            output(transPixPos(k,l,1)+1-xMin,transPixPos(k,l,2)+1-yMin,3) = imgin(k,l,3);
+
+for i = 1:outputWidth
+    for j = 1:outputHeight
+        count = 0;
+        tempr = 0;
+        tempg = 0;
+        tempb = 0;
+        while ~isempty(c{i,j,count+1})
+            tempr = tempr + c{i,j,count+1,1};
+            tempg = tempg + c{i,j,count+1,2};
+            tempb = tempb + c{i,j,count+1,3};
+            count = count + 1;
         end
-        %working on resolving overlayed pixels.
+        if count ~= 0
+           output(i,j,1) = round(tempr/count);
+           output(i,j,2) = round(tempg/count);
+           output(i,j,3) = round(tempb/count);
+        else
+           output(i,j,1) = -1;
+           output(i,j,2) = -1; 
+           output(i,j,3) = -1; 
+        end
     end
 end
 
 copyOutput = output;
 
-
-
-for i = 1:outputWidth
+for i = 1:outputWidth    %1-nearest neighbour implementation
     for j = 1:outputHeight
-        %disp(i);
-        %disp(j);
         if output(i,j) == -1
-            temp = 0;
-            count = 0;
-            if i ~= 1 && i ~= outputWidth && copyOutput(i-1,j) ~= -1
-            temp = temp + copyOutput(i-1,j);
-            count = count + 1;
-            end
-            if i ~= 1 && i ~= outputWidth && copyOutput(i+1,j) ~= -1
-            temp = temp + copyOutput(i+1,j);
-            count = count + 1;
-            end
-            if j ~= 1 && j ~= outputHeight && copyOutput(i,j-1) ~= -1
-            temp = temp + copyOutput(i,j-1);
-            count = count + 1;
-            end
-            if j ~= 1 && j ~= outputHeight && copyOutput(i,j+1) ~= -1
-            temp = temp + copyOutput(i,j+1);  
-            count = count + 1;
-            end
-            if count > 0
-                if temp/count > 50 && temp/count < 255
-                    %disp(round(temp/count));
-                end
-                output(i,j,1) = round(temp/count);
-                output(i,j,2) = round(temp/count);
-                output(i,j,3) = round(temp/count);
-            else
-                output(i,j,1) = 0;
-                output(i,j,2) = 0;
-                output(i,j,3) = 0;
-            end
+            
         end
     end
 end
 
-imgout = output;
+imgout = round(output);
 

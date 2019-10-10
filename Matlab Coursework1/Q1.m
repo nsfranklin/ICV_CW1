@@ -1,6 +1,6 @@
- file = fullfile('Datasets','name.png');
- %img = imread(file);
- img = ones(10,10,3);
+file = fullfile('Datasets','name.png');
+img = imread(file);
+%img = rand(7,7,3);
 
 output = ICV_rotate(img, 30);
 imwrite(output, 'rotate30.png');
