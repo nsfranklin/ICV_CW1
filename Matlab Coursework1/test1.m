@@ -5,3 +5,5 @@ disp(mat);
 disp(mat(1,2));
 
 disp(ICV_inverse_3x3(mat));
+
+disp(ICV_inverse_3x3(ICV_inverse_3x3(mat)));

@@ -17,9 +17,7 @@ else
         subvalue7 = transMat(1,2)*transMat(2,3) - transMat(1,3)*transMat(2,2); 
         subvalue8 = transMat(1,1)*transMat(2,3) - transMat(1,3)*transMat(2,1); 
         subvalue9 = transMat(1,1)*transMat(2,2) - transMat(1,2)*transMat(2,1); 
-        
-        matout = (1/det)*[subvalue1,-subvalue2,subvalue3;-subvalue4,subvalue5,-subvalue6;subvalue7,-subvalue8,subvalue9]
-        disp(matout);
+        matout = (1/det)*[subvalue1,-subvalue2,subvalue3;-subvalue4,subvalue5,-subvalue6;subvalue7,-subvalue8,subvalue9];
     end
 end
 

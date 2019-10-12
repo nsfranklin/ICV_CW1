@@ -83,7 +83,7 @@ end
 for i = 1:outputWidth    %1-nearest neighbour implementation
     for j = 1:outputHeight
         if output(i,j) == -1
-            temp = ICV_find_1NN_colour(ICV_inverse_3x3(combindMat)*[i+xMin;j+yMin;1], imgin);
+            temp = ICV_find_1NN_colour(ICV_inverse_3x3(combindMat)*[i+(xMax-xMin);j+(yMax-yMin);1], imgin);
             output(i,j,1) = temp(1);
             output(i,j,2) = temp(2);
             output(i,j,3) = temp(3);
