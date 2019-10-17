@@ -21,12 +21,37 @@ for i = 1:width
        transPixPos(i,j,2) = round(transPixPos(i,j,2));
     end
 end
-%disp(transPixPos);
-xMax = max(max(transPixPos(:,:,1)));
+xMax = max(max(transPixPos(:,:,1))); %shifts the points back into positive world coords
 yMax = max(max(transPixPos(:,:,2)));
 xMin = min(min(transPixPos(:,:,1)));
 yMin = min(min(transPixPos(:,:,2)));
-output = zeros(xMax-xMin+1,yMax-yMin+1,3);
+
+output = zeros(xMax-xMin+1,yMax-yMin+1,3); %creates a matrix to output the final image to.
+outputWidth = size(output,1);
+outputHeight = size(output,2);
+
+c = cell(outputWidth,outputHeight,3,1);
+for i = 1:width %Cell arrays used to find and resolve overlayed pixels. Fills Cell were depth marks overlaying pixels.
+    for j = 1:height
+        if isempty(c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,1}) 
+            c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,1,1} = imgin(i,j,1);
+            c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,1,2} = imgin(i,j,2);
+            c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,1,3} = imgin(i,j,3);
+        else 
+            count = 2;
+            while true 
+                if isempty(c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count})
+                    c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,1} = imgin(i,j,1);
+                    c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,2} = imgin(i,j,2);
+                    c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,3} = imgin(i,j,3);
+                    break;
+                end
+                count = count + 1;
+            end
+        end
+    end
+end
+
 for k = 1:width
     for l = 1:height
         output(transPixPos(k,l,1)+1-xMin,transPixPos(k,l,2)+1-yMin,1) = imgin(k,l,1);
@@ -34,4 +59,7 @@ for k = 1:width
         output(transPixPos(k,l,1)+1-xMin,transPixPos(k,l,2)+1-yMin,3) = imgin(k,l,3); 
     end
 end
+
+
+
 imgout = output;
