@@ -4,17 +4,18 @@ img = imread(file);
 
 output = ICV_rotate(img, 30);
 imwrite(output, 'rotate30.png');
+
 %{
+
 output = ICV_rotate(img, 60);
 imwrite(output, 'rotate60.png');
 
 output = ICV_rotate(img, 120);
 imwrite(output, 'rotate120.png');
 
-
-
 output = ICV_rotate(img, -50);
 imwrite(output, 'rotate-50.png');
+
 
 
 output = ICV_horizontal_skew(img, -80);

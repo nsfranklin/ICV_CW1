@@ -1,29 +1,23 @@
 function imgout = ICV_rotate(imgin, angle) %angle will always be degress so will use cosd() and sind()
 
-width = size(imgin, 1);
+width = size(imgin, 1); %finds image width and height for future use
 height = size(imgin, 2);
 
-rotationMat = [cosd(angle),sind(angle),0;-sind(angle),cosd(angle),0;0,0,1];
-transToOriMat = [1,0,0;0,1,0;-width/2,-height/2,1];
+rotationMat = [cosd(angle),sind(angle),0;-sind(angle),cosd(angle),0;0,0,1]; %defines the rotation matrix
+transToOriMat = [1,0,0;0,1,0;-width/2,-height/2,1]; %defines translation to and from centre
 transFromOriMat = [1,0,0;0,1,0;width/2,height/2,1];
-combindMat = transToOriMat*rotationMat*transFromOriMat;
+combindMat = transToOriMat*rotationMat*transFromOriMat; % Creates combind matrix transformation
 
-transPixPos = zeros(width,height,2); %Temp storage of transformed values
+transPixPos = zeros(width,height,2); %Mat of new positions indexed by old positions
 
-for x = 0:width-1
-    for y = 0:height-1
+for x = 1:width %finds the transformed postions
+    for y = 1:height
        temp = combindMat*[x;y;1]; 
-       transPixPos(x+1,y+1,1) = temp(1);
-       transPixPos(x+1,y+1,2) = temp(2);
+       transPixPos(x+1,y+1,1) = round(temp(1)); 
+       transPixPos(x+1,y+1,2) = round(temp(2));
     end
 end
 
-for i = 1:width
-    for j = 1:height
-       transPixPos(i,j,1) = round(transPixPos(i,j,1));
-       transPixPos(i,j,2) = round(transPixPos(i,j,2));
-    end
-end
 xMax = max(max(transPixPos(:,:,1)));
 yMax = max(max(transPixPos(:,:,2)));
 xMin = min(min(transPixPos(:,:,1)));
@@ -37,17 +31,19 @@ outputHeight = size(output,2);
 c = cell(outputWidth,outputHeight,3,1);
 for i = 1:width %Cell arrays used to find and resolve overlayed pixels. Fills Cell were depth marks overlaying pixels.
     for j = 1:height
-        if isempty(c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,1}) 
+        disp(i);
+        disp(j);
+        if isempty(c{transPixPos(i,j,1)-xMin,transPixPos(i,j,2)-yMin,1}) 
             c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,1,1} = imgin(i,j,1);
             c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,1,2} = imgin(i,j,2);
             c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,1,3} = imgin(i,j,3);
         else 
             count = 2;
             while true 
-                if isempty(c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count})
-                    c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,1} = imgin(i,j,1);
-                    c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,2} = imgin(i,j,2);
-                    c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,3} = imgin(i,j,3);
+                if isempty(c{transPixPos(i,j,1)-xMin,transPixPos(i,j,2)-yMin,count})
+                    c{transPixPos(i,j,1)-xMin,transPixPos(i,j,2)-yMin,count,1} = imgin(i,j,1);
+                    c{transPixPos(i,j,1)-xMin,transPixPos(i,j,2)-yMin,count,2} = imgin(i,j,2);
+                    c{transPixPos(i,j,1)-xMin,transPixPos(i,j,2)-yMin,count,3} = imgin(i,j,3);
                     break;
                 end
                 count = count + 1;

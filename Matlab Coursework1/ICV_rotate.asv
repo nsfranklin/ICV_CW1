@@ -1,12 +1,12 @@
 function imgout = ICV_rotate(imgin, angle) %angle will always be degress so will use cosd() and sind()
 
-width = size(imgin, 1);
+width = size(imgin, 1); %finds image width and height for future use
 height = size(imgin, 2);
 
-rotationMat = [cosd(angle),sind(angle),0;-sind(angle),cosd(angle),0;0,0,1];
-transToOriMat = [1,0,0;0,1,0;-width/2,-height/2,1];
+rotationMat = [cosd(angle),sind(angle),0;-sind(angle),cosd(angle),0;0,0,1]; %defines the rotation matrix
+transToOriMat = [1,0,0;0,1,0;-width/2,-height/2,1]; %defines translation to and from centre
 transFromOriMat = [1,0,0;0,1,0;width/2,height/2,1];
-combindMat = transToOriMat*rotationMat*transFromOriMat;
+combindMat = transToOriMat*rotationMat*transFromOriMat; %
 
 transPixPos = zeros(width,height,2); %Temp storage of transformed values
 
@@ -83,7 +83,7 @@ end
 for i = 1:outputWidth    %1-nearest neighbour implementation
     for j = 1:outputHeight
         if output(i,j) == -1
-            temp = ICV_find_1NN_colour(ICV_inverse_3x3(combindMat)*[i+(xMax-xMin);j+(yMax-yMin);1], imgin);
+            temp = ICV_find_1NN_colour(ICV_inverse_3x3(combindMat)*[i+xMin;j+yMin;1], imgin);
             output(i,j,1) = temp(1);
             output(i,j,2) = temp(2);
             output(i,j,3) = temp(3);

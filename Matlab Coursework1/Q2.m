@@ -10,7 +10,6 @@ img = ICV_togrey(img);
 boxkernel = [1,1,1;1,1,1;1,1,1];
 matConstBoxKernel = 9;
 
-
 %standard 3x3 gaussian blur
 kernelA = [1,2,1;2,4,2;1,2,1];
 %Divisor to 
