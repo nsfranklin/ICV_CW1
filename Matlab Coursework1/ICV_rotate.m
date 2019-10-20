@@ -24,7 +24,7 @@ xMin = min(min(transPixPos(:,:,1)));
 yMin = min(min(transPixPos(:,:,2)));
 
 output = ones(xMax-xMin+1,yMax-yMin+1,3);
-output = output*-1;
+output = output*-1; %turns the value of all pixels to -1 to identify pixel that haven't been altered yet in the output.
 outputWidth = size(output,1);
 outputHeight = size(output,2);
 
@@ -52,19 +52,22 @@ for i = 1:width %Cell arrays used to find and resolve overlayed pixels. Fills Ce
     end
 end
 
-for i = 1:outputWidth
-    for j = 1:outputHeight
+for i = 1:outputWidth % average overlayed pixels as they are found in the cell matrix
+    for j = 1:outputHeight %loop thought the each pixel in the cell matrix. when a non empty
         count = 0;
         tempr = 0;
         tempg = 0;
         tempb = 0;
-        while ~isempty(c{i,j,count+1})
+        while ~isempty(c{i,j,count+1}) %loops thought the depth of the pixel to average the colour.
             tempr = tempr + c{i,j,count+1,1};
             tempg = tempg + c{i,j,count+1,2};
             tempb = tempb + c{i,j,count+1,3};
             count = count + 1;
+            if tempr < 254
+                disp(tempr)
+            end
         end
-        if count ~= 0
+        if count > 0 %indentified if a hole is present. If count is 0 there where no pixels assign by the transformation. to that point in the output
            output(i,j,1) = round(tempr/count);
            output(i,j,2) = round(tempg/count);
            output(i,j,3) = round(tempb/count);
@@ -75,6 +78,7 @@ for i = 1:outputWidth
         end
     end
 end
+
 
 for i = 1:outputWidth    %1-nearest neighbour implementation
     for j = 1:outputHeight
