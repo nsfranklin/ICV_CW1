@@ -1,28 +1,44 @@
-function intersectionout = ICV_histogram_intersection(hist1, hist2)
-
-intersectionout = 0;
-
-for x = 1:255
-    if hist1(x,1) < hist2(x,1)
-        intersectionout = intersectionout + hist1(x,1);
-    else
-        intersectionout = intersectionout + hist2(x,1);
-    end
-    
-    if hist1(x,2) < hist2(x,2)
-        intersectionout = intersectionout + hist1(x,2);
-    else
-        intersectionout = intersectionout + hist2(x,2);
-    end
-    
-    if hist1(x,3) < hist2(x,3)
-        intersectionout = intersectionout + hist1(x,3);
-    else
-        intersectionout = intersectionout + hist2(x,3);
-    end
-end
+% creates the intersection histogram and finds the total number of channel
+% pixels that intersect and the model total used to normalize the
+% intersection total.
+function [intersectionHistoOut, pixelTotalOut, modelTotal] = ICV_histogram_intersection(hist1, hist2) 
+intersectionHistoOut = 0;
+pixelTotalOut = 0;
+modelTotal = 0;
 
 for x = 1:256
-    histTotal = histTotal + hist2
+    %channel 1 Red
+    if hist1(x,1) < hist2(x,1)
+        intersectionHistoOut = intersectionHistoOut + hist1(x,1);
+        pixelTotalOut = pixelTotalOut + hist1(x,1);
+    else
+        intersectionHistoOut = intersectionHistoOut + hist2(x,1);
+        pixelTotalOut = pixelTotalOut + hist2(x,1);
+    end
+    %channel 2 Green
+    if hist1(x,2) < hist2(x,2)
+        intersectionHistoOut = intersectionHistoOut + hist1(x,2);
+        pixelTotalOut = pixelTotalOut + hist1(x,2);
+    else
+        intersectionHistoOut = intersectionHistoOut + hist2(x,2);
+        pixelTotalOut = pixelTotalOut + hist2(x,2);
+    end
+    %channel 3 Blue
+    if hist1(x,3) < hist2(x,3)
+        intersectionHistoOut = intersectionHistoOut + hist1(x,3);
+        pixelTotalOut = pixelTotalOut + hist1(x,3);
+    else
+        intersectionHistoOut = intersectionHistoOut + hist2(x,3);
+        pixelTotalOut = pixelTotalOut + hist2(x,3);
+    end
 end
-intersectionout
+ %the total of number of pixels in the model frames histogram 
+for x = 1:256
+    modelTotal = modelTotal + hist2(x,1);
+    modelTotal = modelTotal + hist2(x,2);
+    modelTotal = modelTotal + hist2(x,3); 
+end
+
+disp(pixelTotalOut);
+disp(modelTotal);
+disp(pixelTotalOut/modelTotal);
