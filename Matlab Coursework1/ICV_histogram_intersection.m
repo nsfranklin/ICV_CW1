@@ -1,10 +1,11 @@
 % creates the intersection histogram and finds the total number of channel
 % pixels that intersect and the model total used to normalize the
 % intersection total.
-function [intersectionHistoOut, pixelTotalOut, modelTotal] = ICV_histogram_intersection(hist1, hist2) 
+function [intersectionHistoOut, intersectionPercent] = ICV_histogram_intersection(hist1, hist2) 
 intersectionHistoOut = 0;
 pixelTotalOut = 0;
 modelTotal = 0;
+intersectionPercent = 0;
 
 for x = 1:256
     %channel 1 Red
@@ -39,6 +40,4 @@ for x = 1:256
     modelTotal = modelTotal + hist2(x,3); 
 end
 
-disp(pixelTotalOut);
-disp(modelTotal);
-disp(pixelTotalOut/modelTotal);
+intersectionPercent = pixelTotalOut/modelTotal;
