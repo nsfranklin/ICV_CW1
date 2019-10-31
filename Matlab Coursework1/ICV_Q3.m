@@ -3,7 +3,7 @@ vidObj = VideoReader(file); % Create the Video reader object
 vidFrames = read(vidObj); %reading video frames into Mat
 
 histo = cell(size(vidFrames,4));
-for x = 1:size(vidFrames,4)-1
+for x = 1:size(vidFrames,4)
     %disp(x);
     %disp(vidFrames(:,:,:,10));
     temp = ICV_calc_colour_histogram(vidFrames(:,:,:,x),x);
@@ -30,22 +30,40 @@ saveas(gcf, 'HistogramFrame200.jpg');
 
 %Question 3b
 [intersection88and89, percentage] = ICV_histogram_intersection(histo{88},histo{89}); %the intersection histogram of frame 88 and 89
-plot(intersection88and89,'DisplayName','IntersectionFrame88and89');
+rintersect = intersection88and89(1:256,1);
+gintersect = intersection88and89(1:256,2);
+bintersect = intersection88and89(1:256,3);
+
+area(rintersect,'DisplayName','IntersectionFrame88and89');
+hold on
+area(gintersect,'DisplayName','IntersectionFrame88and89');
+area(bintersect,'DisplayName','IntersectionFrame88and89');
+plot(histo{88},'DisplayName','temp100');
+plot(histo{89},'DisplayName','temp100');
 xlim([1,256]);
-imwrite(vidFrames(:,:,:,88),'frame88.jpg');
-imwrite(vidFrames(:,:,:,89),'frame89.jpg');
 saveas(gcf, 'IntersectionFrame88and89.jpg');
 disp("Percentage intersection between 88 and 89");
 disp(percentage);
+hold off
 
-[intersection6and7, percentage] = ICV_histogram_intersection(histo{6},histo{7}); %the intersection histogram of frame 89 and 90
-plot(intersection6and7,'DisplayName','IntersectionFrame6and7'); %modify to show the 
+
+[intersection9and10, percentage] = ICV_histogram_intersection(histo{9},histo{10}); %the intersection histogram of frame 89 and 90
+rintersect = intersection9and10(1:256,1);
+gintersect = intersection9and10(1:256,2);
+bintersect = intersection9and10(1:256,3);
+
+area(rintersect,'DisplayName','IntersectionFrame9and10'); %modify to show the the areas of the intersection with the other frame intersections overlayed
+hold on
+area(gintersect,'DisplayName','IntersectionFrame9and10');
+area(bintersect,'DisplayName','IntersectionFrame9and10');
+plot(histo{9},'DisplayName','temp100');
+plot(histo{10},'DisplayName','temp100');
 xlim([1,256]);
-imwrite(vidFrames(:,:,:,6),'frame6.jpg');
-imwrite(vidFrames(:,:,:,7),'frame7.jpg');
-saveas(gcf, 'IntersectionFrame6and7.jpg');
-disp("Percentage intersection between 6 and 7");
+ylim([0,4500]);
+saveas(gcf, 'IntersectionFrame9and10.jpg');
+disp("Percentage intersection between 9 and 10");
 disp(percentage);
+hold off
 
 plot(histo{88},'DisplayName','temp100');
 xlim([1,256]);
@@ -55,13 +73,11 @@ plot(histo{89},'DisplayName','temp100');
 xlim([1,256]);
 saveas(gcf, 'HistogramFrame89.jpg');
 
-plot(histo{6},'DisplayName','temp100');
+plot(histo{9},'DisplayName','temp100');
 xlim([1,256]);
-saveas(gcf, 'HistogramFrame6.jpg');
+saveas(gcf, 'HistogramFrame9.jpg');
 
-plot(histo{7},'DisplayName','temp100');
+plot(histo{10},'DisplayName','temp100');
 xlim([1,256]);
-saveas(gcf, 'HistogramFrame7.jpg');
-
-
+saveas(gcf, 'HistogramFrame10.jpg');
 

@@ -1,5 +1,7 @@
-My submittion requires that the Dataset is unzipped and placed in the working directory. 
+My submittion requires that the Dataset is unzipped and placed in the working directory with all the scripts.
 
-Each question is run from its ICV_Q'X'.m file and will output the results into the current working directory which these are to be run from.
+Each question is run from its ICV_Q'X'.m file and will output the images and plots into the current working directory which these are to be run from. In addition figures used in the report are printed to the console.
+
+I used fullfile so that my implementation will work on all platforms.
 
 
