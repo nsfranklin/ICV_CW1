@@ -40,16 +40,18 @@ ICV_inverse_3x3.m
 
     Finds the inverse of a 3x3 matrix
 
-ICV_min_hist.m
+ICV_rotate_mask.m
 
-    Unused proto fucntion
+    returns a new mask that is a 180 degree rotation of the input mask
 
-ICV_normalise_histogram.m
+ICV_isMaskSymetric 
 
+    evaluates if the input mask is symetric or not. For the perpose of determined if the mask needs to be rotated to perform convolusion.
 
 ICV_padarry.m
 
-	
+	Takes three inputs: image matrix, mode and thickness. only mode 1 is used. 
+    Mode one is pad with zeros. where a padding of zero equal to the thickness is added around the image and the new image returned
 
 ICV_rotate.m
 
