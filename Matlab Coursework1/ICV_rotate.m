@@ -28,26 +28,32 @@ output = output*-1; %turns the value of all pixels to -1 to identify pixel that 
 outputWidth = size(output,1);
 outputHeight = size(output,2);
 
-c = cell(outputWidth,outputHeight,3,1);
+c{outputWidth,outputHeight,2,3} = []; %value 3 is the depth it is set at 2 so that matlab doesn't collapse this dimension
 for i = 1:width %Cell arrays used to find and resolve overlayed pixels. Fills Cell were depth marks overlaying pixels.
     for j = 1:height
-        disp(i);
-        disp(j);
-        if isempty(c{transPixPos(i,j,1)-xMin,transPixPos(i,j,2)-yMin,1}) 
-            c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,1,1} = imgin(i,j,1);
-            c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,1,2} = imgin(i,j,2);
-            c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,1,3} = imgin(i,j,3);
-        else 
-            count = 2;
-            while true 
-                if isempty(c{transPixPos(i,j,1)-xMin,transPixPos(i,j,2)-yMin,count})
-                    c{transPixPos(i,j,1)-xMin,transPixPos(i,j,2)-yMin,count,1} = imgin(i,j,1);
-                    c{transPixPos(i,j,1)-xMin,transPixPos(i,j,2)-yMin,count,2} = imgin(i,j,2);
-                    c{transPixPos(i,j,1)-xMin,transPixPos(i,j,2)-yMin,count,3} = imgin(i,j,3);
-                    break;
-                end
-                count = count + 1;
+        notFound = true;
+        count = 1;
+        while notFound == true
+            %disp(size(c));
+            if count > size(c,3) %increases the depth of the cell array if count greater than its depth
+                disp(size(c));
+                c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,3} = [];
+            end            
+            %disp(count);
+            tempXPos = transPixPos(i,j,1)-xMin+1;
+            tempYPos = transPixPos(i,j,2)-yMin+1;
+            targetCellR = c{tempXPos,tempYPos,count,1};
+            targetCellG = c{tempXPos,tempYPos,count,2};
+            targetCellB = c{tempXPos,tempYPos,count,3};
+            disp(c{i,j});
+            if true %isempty(targetCellR) && isempty(targetCellG) && isempty(targetCellB)
+            %    disp("Added value");
+                c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,1} = imgin(i,j,1);
+                c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,2} = imgin(i,j,2);
+                c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,3} = imgin(i,j,3);
+                notFound = false;
             end
+            count = count + 1;
         end
     end
 end
@@ -63,9 +69,6 @@ for i = 1:outputWidth % average overlayed pixels as they are found in the cell m
             tempg = tempg + c{i,j,count+1,2};
             tempb = tempb + c{i,j,count+1,3};
             count = count + 1;
-            if tempr < 254
-                disp(tempr)
-            end
         end
         if count > 0 %indentified if a hole is present. If count is 0 there where no pixels assign by the transformation. to that point in the output
            output(i,j,1) = round(tempr/count);

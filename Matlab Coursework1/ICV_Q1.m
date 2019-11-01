@@ -1,5 +1,5 @@
-file = fullfile('Datasets','DatasetA','car-1.jpg');
-%file = fullfile('Datasets','name.png');
+%file = fullfile('Datasets','DatasetA','car-1.jpg');
+file = fullfile('Datasets','name.png');
 img = imread(file);
 %img = rand(7,7,3);
 
@@ -7,8 +7,8 @@ img = imread(file);
 output = ICV_rotate(img, 30);
 imwrite(output, 'rotate30.png');
 
-%{
 
+%{
 output = ICV_rotate(img, 60);
 imwrite(output, 'rotate60.png');
 
@@ -20,9 +20,11 @@ imwrite(output, 'rotate-50.png');
 
 
 
+
 output = ICV_horizontal_skew(img, -80);
 imwrite(output, 'skew10.png');
 imshow('skew10.png');
+
 
 output = ICV_horizontal_skew(img, 40);
 imwrite(output, 'skew40.png');
