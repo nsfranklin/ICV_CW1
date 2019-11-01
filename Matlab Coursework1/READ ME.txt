@@ -1,5 +1,55 @@
-My submittion requires that the Dataset is unzipped and placed in the working directory. 
+My submission requires that the Dataset is unzipped and placed in the working directory. 
 
 Each question is run from its ICV_Q'X'.m file and will output the results into the current working directory which these are to be run from.
 
 
+Script Descriptions:
+
+ICV_abs.m
+
+
+ICV_calc_colour_histogram.m
+
+
+ICV_convolve.m
+
+
+ICV_find_1NN_colour.m
+
+
+ICV_find_det_3x3.m
+
+
+ICV_find_reverence_frame.m
+
+
+ICV_histogram_intersection.m
+
+
+ICV_horizontal_skew.m
+
+
+ICV_inverse_3x3.m
+
+
+ICV_min_hist.m
+
+
+ICV_normalise_histogram.m
+
+
+ICV_padarry.m
+
+	
+
+ICV_rotate.m
+
+	Takes two inputs a image matrix and a angle. Outputs a rotated image matrix rotated by the angle.
+
+ICV_togrey.m
+
+	Takes an input RGB colour and transforms it into a single gray scale value using the mat lab documentations standard proportions.
+
+ICV_transpose_square.m
+
+	Defines the function that transposes a square matrix.
