@@ -3,7 +3,7 @@ function imgout = ICV_convolve(imgin, mask, matConst) %needs to work on a square
 width = size(imgin,1);
 height = size(imgin,2);
 maskwidth = size(mask,1);
-maskheight = size(mask,2)
+maskheight = size(mask,2);
 
 if ICV_isMaskSymetric(mask) ~= true %if mask is not symetric rotates the mask then applies correlation. using rotated mask.
     ICV_rotate_mask(mask);

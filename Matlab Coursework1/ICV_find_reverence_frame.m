@@ -1,1 +1,0 @@
-function imgout = ICV_find_reverence_frame(imgsequence)

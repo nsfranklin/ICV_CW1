@@ -37,9 +37,6 @@ function colourout = ICV_find_1NN_colour(candidate, image)
             gout = image(x+1,y,2) + image(x,y+1,2) + image(x-1,y,2) +  image(x,y-1,2) + image(x+1,y+1,2) + image(x+1,y+1,2) + image(x+1,y-1,2) + image(x-1,y+1,2);
             bout = image(x+1,y,3) + image(x,y+1,3) + image(x-1,y,3) +  image(x,y-1,3) + image(x+1,y+1,3) + image(x+1,y+1,3) + image(x+1,y-1,3) + image(x-1,y+1,3); 
         end
-        if rout > 255
-            disp(rout/8);
-        end
         colourout(1) = uint8(round(rout/8));
         colourout(2) = uint8(round(gout/8));
         colourout(3) = uint8(round(bout/8));    

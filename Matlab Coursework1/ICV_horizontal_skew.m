@@ -1,5 +1,6 @@
 function imgout = ICV_horizontal_skew(imgin, angle)
 
+angle = -90 + angle;
 
 x = 1/tand(angle);
 width = size(imgin,1);

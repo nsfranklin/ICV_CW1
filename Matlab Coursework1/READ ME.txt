@@ -8,33 +8,41 @@ Script Descriptions:
 
 ICV_abs.m
 
+    Returns the appsolute value of a given integer.
 
 ICV_calc_colour_histogram.m
 
+    Creates a 256x3 array representing the frequencies of each colour given in an image matrix.
 
 ICV_convolve.m
 
+    Performs a convolution using a given square mask of an odd width and an input image.
 
 ICV_find_1NN_colour.m
 
+    Finds the first nearest neight of a given point in a given image. 
+    the candidate point must be reverse transformed into find its position in the given image.
 
 ICV_find_det_3x3.m
 
-
-ICV_find_reverence_frame.m
-
+    Finds the Detminant of a 3x3 matrix
 
 ICV_histogram_intersection.m
 
+    Finds the intersections histogram of two histograms 
+    In addition to the normalized percentage intersection fo the two histograms
 
 ICV_horizontal_skew.m
 
+    Performs a skew from the bottom left of the image. Moving the images verticle to x degress from the verticle axis.
 
 ICV_inverse_3x3.m
 
+    Finds the inverse of a 3x3 matrix
 
 ICV_min_hist.m
 
+    Unused proto fucntion
 
 ICV_normalise_histogram.m
 
