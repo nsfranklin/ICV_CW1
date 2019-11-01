@@ -31,25 +31,16 @@ outputHeight = size(output,2);
 c{outputWidth,outputHeight,2,3} = []; %value 3 is the depth it is set at 2 so that matlab doesn't collapse this dimension
 for i = 1:width %Cell arrays used to find and resolve overlayed pixels. Fills Cell were depth marks overlaying pixels.
     for j = 1:height
-        notFound = true;
         count = 0;
         while ~isempty(c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count+1})
             count = count + 1;
             if count > size(c,3) %increases the depth of the cell array if count greater than its depth
                 c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,3} = [];
             end            
-            tempXPos = transPixPos(i,j,1)-xMin+1;
-            tempYPos = transPixPos(i,j,2)-yMin+1;
-            targetCellR = c{tempXPos,tempYPos,count,1};
-            targetCellG = c{tempXPos,tempYPos,count,2};
-            targetCellB = c{tempXPos,tempYPos,count,3};
             if isempty(c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count})
                 c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,1} = imgin(i,j,1);
                 c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,2} = imgin(i,j,2);
                 c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,3} = imgin(i,j,3);
-                notFound = false;
-                %disp("HERE");
-                disp(count);
             end
         end
     end
@@ -78,6 +69,7 @@ for i = 1:outputWidth % average overlayed pixels as they are found in the cell m
     end
 end
 
+output = ICV_trim(output); %trims the extended black portion of the image.
 
 for i = 1:outputWidth    %1-nearest neighbour implementation
     for j = 1:outputHeight
