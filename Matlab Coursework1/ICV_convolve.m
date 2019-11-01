@@ -6,7 +6,7 @@ maskwidth = size(mask,1);
 maskheight = size(mask,2);
 
 if ICV_isMaskSymetric(mask) ~= true %if mask is not symetric rotates the mask then applies correlation. using rotated mask.
-    ICV_rotate_mask(mask);
+    mask = ICV_rotate_mask(mask);
 end                                 %if mask is symetric correlation == convolution
 
 
