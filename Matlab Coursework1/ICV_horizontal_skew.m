@@ -49,14 +49,15 @@ for i = 1:width %Cell arrays used to find and resolve overlayed pixels. Fills Ce
     end
 end
 
-output = ICV_trim(output); %trims the extended black portion of the image.
-
 for k = 1:width
     for l = 1:height
         output(transPixPos(k,l,1)+1-xMin,transPixPos(k,l,2)+1-yMin,1) = imgin(k,l,1);
-        output(transPixPos(k,l,1)+1-xMin,transPixPos(k,l,2)+1-yMin,2) = imgin(k,l,2); 
+        temp = imgin(k,l,2); 
+        output(transPixPos(k,l,1)+1-xMin,transPixPos(k,l,2)+1-yMin,2) = temp;
         output(transPixPos(k,l,1)+1-xMin,transPixPos(k,l,2)+1-yMin,3) = imgin(k,l,3); 
     end
 end
+
+output = ICV_trim(output); %trims the extended black portion of the image.
 
 imgout = output;

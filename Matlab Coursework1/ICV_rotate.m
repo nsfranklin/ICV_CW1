@@ -69,8 +69,6 @@ for i = 1:outputWidth % average overlayed pixels as they are found in the cell m
     end
 end
 
-output = ICV_trim(output); %trims the extended black portion of the image.
-
 for i = 1:outputWidth    %1-nearest neighbour implementation
     for j = 1:outputHeight
         if output(i,j) == -1
@@ -81,6 +79,8 @@ for i = 1:outputWidth    %1-nearest neighbour implementation
         end
     end
 end
+
+output = ICV_trim(output); %trims the extended black portion of the image.
 
 imgout = round(output);
 
