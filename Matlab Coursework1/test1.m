@@ -1,5 +1,6 @@
-mat = [1,2,3;4,0,6;7,8,9];
+c = {1,2,3};
+disp(c);
 
-disp(mat);
+c{3,2,2} = 2;
 
-ICV_rotate_mask(mat);
+disp(c);

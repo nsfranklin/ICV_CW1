@@ -78,18 +78,18 @@ for i = 1:outputWidth % average overlayed pixels as they are found in the cell m
         end
     end
 end
-
+%{
 for i = 1:outputWidth    %1-nearest neighbour implementation
     for j = 1:outputHeight
         if output(i,j) == -1
-            temp = ICV_find_1NN_colour(ICV_inverse_3x3(combindMat)*[i-1+xMin;j-1+yMin;1], imgin); % I forgot to move the corner of the image back to the orgin from 1,1 so my hole filling kept failing.
+            temp = ICV_find_1NN_colour(ICV_inverse_3x3(combindMat)*[i+xMin;j+yMin;1], imgin);
             output(i,j,1) = temp(1);
             output(i,j,2) = temp(2);
             output(i,j,3) = temp(3);
         end
     end
 end
-
+%}
 output = ICV_trim(output); %trims the extended black portion of the image.
 
 imgout = round(output);
