@@ -1,9 +1,15 @@
 My submittion requires that the Dataset is unzipped and placed in the working directory with all the scripts placed in the working direction. 
-In addition the photo needed for question two needs to be placed in directory with the scripts and be called 'name.png'
+In addition the photo needed for question two needs to be placed in the dataset folder and be called 'name.png'. 
+
+A photo of the file structure need to run the question scripts is included!
 
 Each question is run from its ICV_Q'X'.m file and will output the images and plots into the current working directory which these are to be run from. In addition figures used in the report are printed to the console.
 
 I used fullfile so that my implementation will work on all platforms.
+
+
+
+
 
 Script Descriptions:
 
