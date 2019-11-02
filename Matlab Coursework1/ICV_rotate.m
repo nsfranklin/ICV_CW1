@@ -34,8 +34,14 @@ for i = 1:width %Cell arrays used to find and resolve overlayed pixels. Fills Ce
         count = 0;
         while ~isempty(c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count+1})
             count = count + 1;
+            if count > 1
+                disp(i);
+                disp(j);
+            end
+            disp(count);
             if count > size(c,3) %increases the depth of the cell array if count greater than its depth
                 c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,3} = [];
+                disp("Here");
             end            
             if isempty(c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count})
                 c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,1} = imgin(i,j,1);
@@ -56,6 +62,9 @@ for i = 1:outputWidth % average overlayed pixels as they are found in the cell m
             tempg = tempg + c{i,j,count+1,2};
             tempb = tempb + c{i,j,count+1,3};
             count = count + 1;
+            if tempr ~= 0 && tempr ~= 255
+                disp(tempr);
+            end
         end
         if count > 0 %indentified if a hole is present. If count is 0 there where no pixels assign by the transformation. to that point in the output
            output(i,j,1) = round(tempr/count);

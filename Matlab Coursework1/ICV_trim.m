@@ -12,8 +12,7 @@ verticleBefore = 0;
 verticleAfter = 0;
 
 %Reconstructs the trimmed version of the image.
-disp(max(imgin(1,:)));
-disp(max(imgin(:,1)));
+
 for i = 1:width
    if horizontalBeforeFound == false
        if max(imgin(i,:)) == 0 %any row of column with a max value of -1 is empty and can be trimmed.
@@ -45,7 +44,6 @@ end
 %removes the found extra edges.
 
 if horizontalBefore == 0 && horizontalAfter == 0 && verticleBefore == 0 && verticleAfter == 0
-    disp("Here")
     output = imgin;
 else
     output = imgin(horizontalBefore+1:width-horizontalAfter,verticleBefore+1:height-verticleAfter,:); 

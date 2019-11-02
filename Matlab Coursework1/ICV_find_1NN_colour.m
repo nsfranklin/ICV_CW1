@@ -1,7 +1,7 @@
 function colourout = ICV_find_1NN_colour(candidate, image)
 
     %disp(candidate(1));
-    x = round(candidate(1)+2); %the position of holes after inverse transformation
+    x = round(candidate(1)); %the position of holes after inverse transformation
     y = round(candidate(2));
     
     width = size(image,1);

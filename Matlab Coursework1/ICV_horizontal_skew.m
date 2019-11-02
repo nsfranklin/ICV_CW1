@@ -39,6 +39,7 @@ for i = 1:width %Cell arrays used to find and resolve overlayed pixels. Fills Ce
             count = count + 1;
             if count > size(c,3) %increases the depth of the cell array if count greater than its depth
                 c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,3} = [];
+                disp("here skew");
             end            
             if isempty(c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count})
                 c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,1} = imgin(i,j,1);
