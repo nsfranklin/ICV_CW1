@@ -1,4 +1,6 @@
+%Calculates the determinant of a 3x3 matrix
 function detout = ICV_find_det_3x3(mat)
+
 
 if size(mat,1) == 3 && size(mat,2) == 3
     %returns that detminant of a 3x3 mat

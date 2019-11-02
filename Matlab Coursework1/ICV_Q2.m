@@ -1,3 +1,4 @@
+%Question 2 main script
 %reading image in
 file = fullfile('Datasets','DatasetA','car-1.jpg');
 img = imread(file); 
@@ -12,7 +13,7 @@ matConstBoxKernel = 9;
 
 %standard 3x3 gaussian blur
 kernelA = [1,2,1;2,4,2;1,2,1];
-%Divisor to 
+%Divisor to correct the range of values.
 matConstA = 16;
 
 %standard horizontal and verticle responding edge detection kernel

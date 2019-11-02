@@ -1,7 +1,10 @@
+%calculates the inverse of a given 3x3 matrix
 function matout = ICV_inverse_3x3(mat)
 
+
+%throws an error if the matrix is not a 3x3
 if size(mat,1) ~= 3 || size(mat,2) ~= 3
-    matout = -1;
+    error("not a 3x3");
 else
     det = ICV_find_det_3x3(mat);
     if det == 0  %if the det is 0 there is no inverse. Returns -1

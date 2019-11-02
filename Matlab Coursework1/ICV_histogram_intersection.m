@@ -6,6 +6,8 @@ intersectionHistoOut = zeros(256,3);
 pixelTotalOut = 0;
 modelTotal = 0;
 
+%loops though incrementing the values for each pixel to form the
+%intersection histograms and finding the normilized intersection percentage
 for x = 1:256
     %channel 1 Red
     if hist1(x,1) < hist2(x,1)
@@ -32,7 +34,7 @@ for x = 1:256
         pixelTotalOut = pixelTotalOut + hist2(x,3);
     end
 end
- %the total of number of pixels in the model frames histogram 
+ %Calculates the total of number of pixels in the model frames histogram 
 for x = 1:256
     modelTotal = modelTotal + hist2(x,1);
     modelTotal = modelTotal + hist2(x,2);

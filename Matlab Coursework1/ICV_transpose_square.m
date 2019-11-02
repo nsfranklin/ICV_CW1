@@ -3,10 +3,12 @@ function transOut = ICV_transpose_square(mat)
 width = size(mat,1);
 height = size(mat,2);
 
+%throws an error if the matrix is non square
 if width ~= height
     error("Non Square matrix not supported");
 end
 
+%initialises the output array
 temp = zeros(width, height);
 
 for i = 1:width %loops thought to transpose a given square matrix.

@@ -1,3 +1,4 @@
+%calculates the clockwise rotation of a given image.
 function imgout = ICV_rotate(imgin, angle) %angle will always be degress so will use cosd() and sind()
 
 width = size(imgin, 1); %finds image width and height for future use
@@ -37,9 +38,6 @@ for i = 1:width %Cell arrays used to find and resolve overlayed pixels. Fills Ce
         while true
             if count + 1 > size(c,3) %increases the depth of the cell array if count greater than its depth
                 c{i,j,count+1,3} = [];
-                disp("<--");
-                disp(c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,1});
-                disp("-->");
             end            
             if isempty(c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,1})
                 c{transPixPos(i,j,1)+1-xMin,transPixPos(i,j,2)+1-yMin,count,1} = imgin(i,j,1);
@@ -51,26 +49,23 @@ for i = 1:width %Cell arrays used to find and resolve overlayed pixels. Fills Ce
         end
     end
 end
-disp(size(c,3));
 for i = 1:outputWidth % average overlayed pixels as they are found in the cell matrix
     for j = 1:outputHeight %loop thought the each pixel in the cell matrix. when a non empty
         count = 1;
-        tempr = 0;
-        tempg = 0;
-        tempb = 0;
+        tempr = uint16(0);
+        tempg = uint16(0);
+        tempb = uint16(0);
         while ~isempty(c{i,j,count,1}) %loops thought the depth of the pixel to average the colour.
-            tempr = tempr + c{i,j,count,1};
-            tempg = tempg + c{i,j,count,2};
-            tempb = tempb + c{i,j,count,3};
+            tempr = tempr + uint16(c{i,j,count,1});
+            tempg = tempg + uint16(c{i,j,count,2});
+            tempb = tempb + uint16(c{i,j,count,3});
             count = count + 1;
-            %if (tempr ~= 0) & (tempr ~= 255)
-            %    disp(tempr);
-            %end
         end
         if count > 1 %indentified if a hole is present. If count is 0 there where no pixels assign by the transformation. to that point in the output
-           output(i,j,1) = round(tempr/count);
-           output(i,j,2) = round(tempg/count);
-           output(i,j,3) = round(tempb/count);
+
+           output(i,j,1) = tempr/(count-1);
+           output(i,j,2) = tempg/(count-1);
+           output(i,j,3) = tempb/(count-1);
         else
            output(i,j,1) = -1;
            output(i,j,2) = -1; 

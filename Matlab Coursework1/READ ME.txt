@@ -1,4 +1,5 @@
-My submittion requires that the Dataset is unzipped and placed in the working directory with all the scripts.
+My submittion requires that the Dataset is unzipped and placed in the working directory with all the scripts placed in the working direction. 
+In addition the photo needed for question two needs to be placed in directory with the scripts and be called 'name.png'
 
 Each question is run from its ICV_Q'X'.m file and will output the images and plots into the current working directory which these are to be run from. In addition figures used in the report are printed to the console.
 
@@ -9,6 +10,10 @@ Script Descriptions:
 ICV_abs.m
 
     Returns the appsolute value of a given integer.
+
+ICV_trim.m
+
+    Crops the input image to only the transformed image.
 
 ICV_calc_colour_histogram.m
 

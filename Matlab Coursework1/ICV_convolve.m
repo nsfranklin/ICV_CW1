@@ -1,3 +1,5 @@
+%Performs a convolution by check if a mask is symatric if it is the mask is
+%rotated then a correlation is performed.
 function imgout = ICV_convolve(imgin, mask, matConst) %needs to work on a square matrix of size 3,5,7
 
 width = size(imgin,1);

@@ -1,3 +1,4 @@
+%Calculates the absolute value of a given integer.
 function out = ICV_abs(num)
 
 if num < 0

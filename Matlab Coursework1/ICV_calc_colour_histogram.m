@@ -1,3 +1,5 @@
+%calculates the colour histogram for a given frame. (don't remember why I
+%passed in the frame number.
 function histout = ICV_calc_colour_histogram(imgin, frameNo)
 width = size(imgin,1);
 height = size(imgin,2);

@@ -1,6 +1,7 @@
+%finds the 1NN to a given reverse transformed point. in the given original
+%image.
 function colourout = ICV_find_1NN_colour(candidate, image)
 
-    %disp(candidate(1));
     x = round(candidate(1)); %the position of holes after inverse transformation
     y = round(candidate(2));
     
@@ -9,7 +10,6 @@ function colourout = ICV_find_1NN_colour(candidate, image)
     
     colourout = zeros(3);
 
-    
     if (x >= width || y >= height) || (x <= 1 || y <= 1)
         colourout(1) = 0;
         colourout(2) = 0;
