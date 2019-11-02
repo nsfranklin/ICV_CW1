@@ -8,28 +8,33 @@ vidFrames = read(vidObj); %reading video frames into Mat
 histo = cell(size(vidFrames,4));
 for x = 1:size(vidFrames,4)
     temp = ICV_calc_colour_histogram(vidFrames(:,:,:,x),x);
+    if x == 100
+        imwrite(vidFrames(:,:,:,100),'frame100.jpg');
+        te
+        temp100 = temp;
+    end
+    if x == 200
+        imwrite(vidFrames(:,:,:,200),'frame200.jpg');
+        temp200 = temp;
+    end
     histo{x} = temp;
 end
 
-%included in the report 
 imwrite(vidFrames(:,:,:,100),'frame100.jpg');
-imwrite(vidFrames(:,:,:,200),'frame200.jpg');
+imwrite(vidFrames(:,:,:,100),'frame100.jpg');
+imwrite(vidFrames(:,:,:,100),'frame100.jpg');
+imwrite(vidFrames(:,:,:,100),'frame100.jpg');
+
 
 %Question 3a
-plot(histo{100},'DisplayName','temp100'); %histogram of Frame 100
+plot(vidFrames(:,:,:,100),'DisplayName','temp100'); %histogram of Frame 100
 xlim([1,256]);
 saveas(gcf, 'HistogramFrame100.jpg');
 
-plot(histo{200},'DisplayName','temp200'); %histogram of Frame 200
+plot(vidFrames(:,:,:,200),'DisplayName','temp200'); %histogram of Frame 200
 xlim([1,256]);
 saveas(gcf, 'HistogramFrame200.jpg');
 
-
-%included in the report. Question 3b)
-imwrite(vidFrames(:,:,:,100),'frame9.jpg');
-imwrite(vidFrames(:,:,:,100),'frame10.jpg');
-imwrite(vidFrames(:,:,:,100),'frame88.jpg');
-imwrite(vidFrames(:,:,:,100),'frame89.jpg');
 
 %Question 3b
 %the intersection histogram of frame 88 and 89
